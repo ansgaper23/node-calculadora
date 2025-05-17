@@ -1,78 +1,54 @@
-import React, { Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Layout from '@/components/Layout';
-import { motion } from 'framer-motion';
-import { Loader2 } from 'lucide-react';
-
-const HomePage = lazy(() => import('@/pages/HomePage'));
-const CalculatorsPage = lazy(() => import('@/pages/CalculatorsPage'));
-const VoltageDropCalculator = lazy(() => import('@/components/calculators/VoltageDropCalculator'));
-const WireGaugeCalculator = lazy(() => import('@/components/calculators/WireGaugeCalculator'));
-const EnergyConsumptionCalculator = lazy(() => import('@/components/calculators/EnergyConsumptionCalculator'));
-const UnitConversionCalculator = lazy(() => import('@/components/calculators/UnitConversionCalculator'));
-
-const DatabasesPage = lazy(() => import('@/pages/DatabasesPage'));
-const WireGaugesDB = lazy(() => import('@/components/databases/WireGaugesDB'));
-const ElectricalCodesDB = lazy(() => import('@/components/databases/ElectricalCodesDB'));
-const ElectricalSymbolsDB = lazy(() => import('@/components/databases/ElectricalSymbolsDB'));
-const ElectricalTermsDB = lazy(() => import('@/components/databases/ElectricalTermsDB'));
-
-const ResourcesPage = lazy(() => import('@/pages/ResourcesPage'));
-
-const ToolsPage = lazy(() => import('@/pages/ToolsPage'));
-const QuoteGenerator = lazy(() => import('@/components/tools/QuoteGenerator'));
-const MaterialLists = lazy(() => import('@/components/tools/MaterialLists'));
-const ToolSuggestions = lazy(() => import('@/components/tools/ToolSuggestions'));
-const DownloadableTemplates = lazy(() => import('@/components/tools/DownloadableTemplates'));
-
-const CommunityPage = lazy(() => import('@/pages/CommunityPage'));
-const PlaceholderPage = lazy(() => import('@/pages/PlaceholderPage'));
-
-const LoadingFallback = () => (
-  <div className="flex items-center justify-center h-screen">
-    <motion.div
-      animate={{ rotate: 360 }}
-      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-    >
-      <Loader2 className="w-12 h-12 text-primary" />
-    </motion.div>
-  </div>
-);
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
+import HomePage from '@/pages/HomePage';
+import ToolsPage from '@/pages/ToolsPage';
+import VoltageDropCalculatorPage from '@/pages/tools/VoltageDropCalculatorPage';
+import WireGaugeCalculatorPage from '@/pages/tools/WireGaugeCalculatorPage';
+import EnergyConsumptionCalculatorPage from '@/pages/tools/EnergyConsumptionCalculatorPage';
+import UnitConverterPage from '@/pages/tools/UnitConverterPage';
+import BudgetGeneratorPage from '@/pages/tools/BudgetGeneratorPage';
+import MaterialListsPage from '@/pages/tools/MaterialListsPage';
+import SupplierDirectoryPage from '@/pages/SupplierDirectoryPage';
+import EducationalResourcesPage from '@/pages/EducationalResourcesPage';
+import ForumPage from '@/pages/ForumPage';
+import UserDashboardPage from '@/pages/UserDashboardPage';
+import LoginPage from '@/pages/LoginPage';
+import RegisterPage from '@/pages/RegisterPage';
+import NotFoundPage from '@/pages/NotFoundPage';
+import { Toaster } from "@/components/ui/toaster";
+import { AuthProvider } from '@/contexts/AuthContext';
 
 function App() {
   return (
     <Router>
-      <Suspense fallback={<LoadingFallback />}>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<HomePage />} />
-            <Route path="calculators" element={<CalculatorsPage />}>
-              <Route index element={<Navigate to="voltage-drop" replace />} />
-              <Route path="voltage-drop" element={<VoltageDropCalculator />} />
-              <Route path="wire-gauge" element={<WireGaugeCalculator />} />
-              <Route path="energy-consumption" element={<EnergyConsumptionCalculator />} />
-              <Route path="unit-conversion" element={<UnitConversionCalculator />} />
-            </Route>
-            <Route path="databases" element={<DatabasesPage />}>
-              <Route index element={<Navigate to="wire-gauges" replace />} />
-              <Route path="wire-gauges" element={<WireGaugesDB />} />
-              <Route path="electrical-codes" element={<ElectricalCodesDB />} />
-              <Route path="electrical-symbols" element={<ElectricalSymbolsDB />} />
-              <Route path="electrical-terms" element={<ElectricalTermsDB />} />
-            </Route>
-            <Route path="resources" element={<ResourcesPage />} />
-            <Route path="tools" element={<ToolsPage />} />
-              <Route path="tools/quote-generator" element={<QuoteGenerator />} />
-              <Route path="tools/material-lists" element={<MaterialLists />} />
-              <Route path="tools/tool-suggestions" element={<ToolSuggestions />} />
-              <Route path="tools/templates" element={<DownloadableTemplates />} />
-            <Route path="community" element={<CommunityPage />} />
-            <Route path="privacy" element={<PlaceholderPage title="Política de Privacidad" message="Nuestra política de privacidad se detallará aquí." />} />
-            <Route path="terms" element={<PlaceholderPage title="Términos de Servicio" message="Nuestros términos de servicio se detallarán aquí." />} />
-            <Route path="*" element={<PlaceholderPage title="Página No Encontrada (404)" message="La página que busca no existe o ha sido movida."/>} />
-          </Route>
-        </Routes>
-      </Suspense>
+      <AuthProvider>
+        <div className="flex flex-col min-h-screen bg-background">
+          <Header />
+          <main className="flex-grow">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/herramientas" element={<ToolsPage />} />
+              <Route path="/herramientas/caida-tension" element={<VoltageDropCalculatorPage />} />
+              <Route path="/herramientas/calibre-cable" element={<WireGaugeCalculatorPage />} />
+              <Route path="/herramientas/consumo-energia" element={<EnergyConsumptionCalculatorPage />} />
+              <Route path="/herramientas/conversion-unidades" element={<UnitConverterPage />} />
+              <Route path="/herramientas/generador-presupuestos" element={<BudgetGeneratorPage />} />
+              <Route path="/herramientas/listas-materiales" element={<MaterialListsPage />} />
+              <Route path="/directorio-proveedores" element={<SupplierDirectoryPage />} />
+              <Route path="/recursos-educativos" element={<EducationalResourcesPage />} />
+              <Route path="/foro" element={<ForumPage />} />
+              <Route path="/panel-usuario" element={<UserDashboardPage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/registro" element={<RegisterPage />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </main>
+          <Footer />
+          <Toaster />
+        </div>
+      </AuthProvider>
     </Router>
   );
 }

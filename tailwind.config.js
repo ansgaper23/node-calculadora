@@ -6,7 +6,6 @@ module.exports = {
 		'./components/**/*.{js,jsx}',
 		'./app/**/*.{js,jsx}',
 		'./src/**/*.{js,jsx}',
-		'./index.html',
 	],
 	theme: {
 		container: {
@@ -51,6 +50,12 @@ module.exports = {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))',
 				},
+        brand: {
+          yellow: '#FFD700',
+          blue: '#00529B',
+          lightBlue: '#007BFF',
+          darkBlue: '#003F7F',
+        }
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -59,38 +64,22 @@ module.exports = {
 			},
 			keyframes: {
 				'accordion-down': {
-					from: { height: '0' },
+					from: { height: 0 },
 					to: { height: 'var(--radix-accordion-content-height)' },
 				},
 				'accordion-up': {
 					from: { height: 'var(--radix-accordion-content-height)' },
-					to: { height: '0' },
+					to: { height: 0 },
 				},
-				'collapsible-down': {
-          from: { height: '0' },
-          to: { height: 'var(--radix-collapsible-content-height)' },
-        },
-        'collapsible-up': {
-          from: { height: 'var(--radix-collapsible-content-height)' },
-          to: { height: '0' },
-        },
-        'slide-down': {
-          from: { height: '0px' },
-          to: { height: 'var(--radix-navigation-menu-viewport-height)' },
-        },
-        'slide-up': {
-          from: { height: 'var(--radix-navigation-menu-viewport-height)' },
-          to: { height: '0px' },
-        },
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				'collapsible-down': 'collapsible-down 0.2s ease-out',
-        'collapsible-up': 'collapsible-up 0.2s ease-out',
-        'slide-down': 'slide-down 0.2s ease-out',
-        'slide-up': 'slide-up 0.2s ease-out',
 			},
+      backgroundImage: {
+        'gradient-electric': 'linear-gradient(to right, #FFD700, #00529B)',
+        'gradient-electric-rev': 'linear-gradient(to left, #FFD700, #00529B)',
+      }
 		},
 	},
 	plugins: [require('tailwindcss-animate')],
