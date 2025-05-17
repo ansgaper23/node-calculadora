@@ -140,7 +140,7 @@ const UserDashboardPage = () => {
           <DashboardCard 
             icon={<Settings size={32} />}
             title="Configuración de Perfil"
-            description="Actualizar tu información personal y preferencias de cuenta (Próximamente)."
+            description="Actualizar tu información personal y preferencias de cuenta."
             link="/editar-perfil"
             buttonText="Editar Perfil"
           />
