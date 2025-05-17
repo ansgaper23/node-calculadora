@@ -19,7 +19,11 @@ import RegisterPage from '@/pages/RegisterPage';
 import NotFoundPage from '@/pages/NotFoundPage';
 import { Toaster } from "@/components/ui/toaster";
 import { AuthProvider } from '@/contexts/AuthContext';
-
+// ...existing code...
+import EditProfile from "@/pages/EditProfile";
+// ...existing code...
+<Route path="/editar-perfil" element={<EditProfile />} />
+// ...existing code...
 function App() {
   return (
     <Router>

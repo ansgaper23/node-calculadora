@@ -141,8 +141,8 @@ const UserDashboardPage = () => {
             icon={<Settings size={32} />}
             title="Configuración de Perfil"
             description="Actualizar tu información personal y preferencias de cuenta (Próximamente)."
-            link="#"
-            buttonText="Editar Perfil (Próx.)"
+            link="/editar-perfil"
+            buttonText="Editar Perfil"
           />
         </motion.div>
       </div>
